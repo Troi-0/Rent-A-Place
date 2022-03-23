@@ -26,6 +26,20 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<RealEstate> RealEstates { get; set; }
+
+        public DbSet<District> Districts { get; set; }
+
+        public DbSet<RealEstateType> RealEstateTypes { get; set; }
+
+        public DbSet<BuildingType> BuildingTypes { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<RealEstateTag> RealEstateTags { get; set; }
+
+        public DbSet<RealEstateBooking> RealEstateBookings { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

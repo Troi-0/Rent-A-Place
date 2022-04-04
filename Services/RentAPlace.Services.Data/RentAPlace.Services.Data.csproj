@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\RentAPlace.Data.Common\RentAPlace.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\RentAPlace.Data.Models\RentAPlace.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\RentAPlace.Web.ViewModels\RentAPlace.Web.ViewModels.csproj" />
     <ProjectReference Include="..\RentAPlace.Services.Mapping\RentAPlace.Services.Mapping.csproj" />
   </ItemGroup>
 

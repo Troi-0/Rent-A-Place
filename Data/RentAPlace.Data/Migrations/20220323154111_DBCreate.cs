@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace RentAPlace.Data.Migrations
+﻿namespace RentAPlace.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class DBCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

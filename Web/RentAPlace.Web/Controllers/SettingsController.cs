@@ -15,11 +15,16 @@
         private readonly ISettingsService settingsService;
 
         private readonly IDeletableEntityRepository<Setting> repository;
+        private readonly IRealEstateService realEstateService;
 
-        public SettingsController(ISettingsService settingsService, IDeletableEntityRepository<Setting> repository)
+        public SettingsController(
+            ISettingsService settingsService,
+            IDeletableEntityRepository<Setting> repository,
+            IRealEstateService realEstateService)
         {
             this.settingsService = settingsService;
             this.repository = repository;
+            this.realEstateService = realEstateService;
         }
 
         public IActionResult Index()
@@ -34,8 +39,21 @@
             var random = new Random();
             var setting = new Setting { Name = $"Name_{random.Next()}", Value = $"Value_{random.Next()}" };
 
-            await this.repository.AddAsync(setting);
-            await this.repository.SaveChangesAsync();
+            /*await this.repository.AddAsync(setting);
+            await this.repository.SaveChangesAsync();*/
+            await this.realEstateService.CreateAsync(
+            new ViewModels.RealEstates.CreateRealEstateViewModel
+            {
+                Floor = 3,
+                BuildingTypeName = "test",
+                DistrictName = "test",
+                RealEstateTypeName = "test",
+                Rent = 100,
+                Size = 100,
+                TotalNumberOfFoloors = 10,
+                Year = 2020,
+            },
+            null);
 
             return this.RedirectToAction(nameof(this.Index));
         }

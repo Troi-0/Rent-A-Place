@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using RentAPlace.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using RentAPlace.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

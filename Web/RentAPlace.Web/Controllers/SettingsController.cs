@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using RentAPlace.Data.Common.Repositories;
     using RentAPlace.Data.Models;
     using RentAPlace.Services.Data;
     using RentAPlace.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {
@@ -39,22 +38,8 @@
             var random = new Random();
             var setting = new Setting { Name = $"Name_{random.Next()}", Value = $"Value_{random.Next()}" };
 
-            /*await this.repository.AddAsync(setting);
-            await this.repository.SaveChangesAsync();*/
-            await this.realEstateService.CreateAsync(
-            new ViewModels.RealEstates.CreateRealEstateViewModel
-            {
-                Floor = 3,
-                BuildingTypeName = "test",
-                DistrictName = "test",
-                RealEstateTypeName = "test",
-                Rent = 100,
-                Size = 100,
-                TotalNumberOfFoloors = 10,
-                Year = 2020,
-            },
-            null);
-
+            await this.repository.AddAsync(setting);
+            await this.repository.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
     }

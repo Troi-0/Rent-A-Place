@@ -1,9 +1,8 @@
 ﻿namespace RentAPlace.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using RentAPlace.Services.Data;
     using RentAPlace.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

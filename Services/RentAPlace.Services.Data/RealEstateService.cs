@@ -15,18 +15,18 @@
         private readonly IDeletableEntityRepository<RealEstate> realEstateRepository;
         private readonly IDeletableEntityRepository<District> districtRepository;
         private readonly IDeletableEntityRepository<BuildingType> buildingTypeRepository;
-        private readonly IDeletableEntityRepository<RealEstateType> realEstatetypeRepository;
+        private readonly IDeletableEntityRepository<RealEstateType> realEstateTypeRepository;
 
         public RealEstateService(
             IDeletableEntityRepository<RealEstate> realEstateRepository,
             IDeletableEntityRepository<District> districtRepository,
             IDeletableEntityRepository<BuildingType> buildingTypeRepository,
-            IDeletableEntityRepository<RealEstateType> realEstatetypeRepository)
+            IDeletableEntityRepository<RealEstateType> realEstateTypeRepository)
         {
             this.realEstateRepository = realEstateRepository;
             this.districtRepository = districtRepository;
             this.buildingTypeRepository = buildingTypeRepository;
-            this.realEstatetypeRepository = realEstatetypeRepository;
+            this.realEstateTypeRepository = realEstateTypeRepository;
         }
 
         public async Task CreateAsync(CreateRealEstateViewModel input, string userId)
@@ -70,7 +70,7 @@
 
             // RealEstateType
             var realEstateTypeName = input.RealEstateTypeName;
-            var realEstateType = this.realEstatetypeRepository.All().FirstOrDefault(x => x.Name == realEstateTypeName);
+            var realEstateType = this.realEstateTypeRepository.All().FirstOrDefault(x => x.Name == realEstateTypeName);
             if (realEstateType == null)
             {
                 realEstateType = new RealEstateType

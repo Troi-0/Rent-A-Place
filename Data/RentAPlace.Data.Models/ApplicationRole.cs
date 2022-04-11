@@ -3,9 +3,8 @@ namespace RentAPlace.Data.Models
 {
     using System;
 
-    using RentAPlace.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using RentAPlace.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

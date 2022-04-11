@@ -5,11 +5,6 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using CommandLine;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
     using RentAPlace.Data;
     using RentAPlace.Data.Common;
     using RentAPlace.Data.Common.Repositories;
@@ -18,6 +13,13 @@
     using RentAPlace.Data.Seeding;
     using RentAPlace.Services.Data;
     using RentAPlace.Services.Messaging;
+
+    using CommandLine;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
 
     public static class Program
     {

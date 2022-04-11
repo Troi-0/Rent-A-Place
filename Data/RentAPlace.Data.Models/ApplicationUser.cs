@@ -4,8 +4,9 @@ namespace RentAPlace.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using Microsoft.AspNetCore.Identity;
     using RentAPlace.Data.Common.Models;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

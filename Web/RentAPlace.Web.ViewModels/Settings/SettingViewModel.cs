@@ -1,8 +1,9 @@
 ﻿namespace RentAPlace.Web.ViewModels.Settings
 {
-    using AutoMapper;
     using RentAPlace.Data.Models;
     using RentAPlace.Services.Mapping;
+
+    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

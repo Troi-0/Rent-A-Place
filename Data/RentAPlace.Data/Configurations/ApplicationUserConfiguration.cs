@@ -1,8 +1,8 @@
 ﻿namespace RentAPlace.Data.Configurations
 {
+    using RentAPlace.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
-    using RentAPlace.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

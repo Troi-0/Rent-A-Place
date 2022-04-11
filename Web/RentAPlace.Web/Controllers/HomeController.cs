@@ -2,13 +2,24 @@
 {
     using System.Diagnostics;
 
-    using Microsoft.AspNetCore.Mvc;
     using RentAPlace.Web.ViewModels;
+
+    using Microsoft.AspNetCore.Mvc;
+    using RentAPlace.Services.Data;
+    using System.Threading.Tasks;
 
     public class HomeController : BaseController
     {
+        private readonly IRealEstateService realEstateService;
+
+        public HomeController(IRealEstateService realEstateService)
+        {
+            this.realEstateService = realEstateService;
+        }
+
         public IActionResult Index()
         {
+            
             return this.View();
         }
 

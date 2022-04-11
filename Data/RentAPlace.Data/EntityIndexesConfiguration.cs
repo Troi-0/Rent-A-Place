@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using RentAPlace.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using RentAPlace.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

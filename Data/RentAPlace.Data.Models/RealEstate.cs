@@ -12,6 +12,7 @@
         {
             this.Tags = new HashSet<RealEstateTag>();
             this.Bookings = new HashSet<RealEstateBooking>();
+            this.Images = new HashSet<Image>();
         }
 
         public int Size { get; set; }
@@ -20,7 +21,7 @@
 
         public int? TotalNumberOfFloors { get; set; }
 
-        public int? Year { get; set; }
+        public DateTime? Year { get; set; }
 
         public int Rent { get; set; }
 
@@ -43,5 +44,7 @@
         public ICollection<RealEstateTag> Tags { get; set; }
 
         public ICollection<RealEstateBooking> Bookings { get; set; }
+
+        public ICollection<Image> Images { get; set; }
     }
 }

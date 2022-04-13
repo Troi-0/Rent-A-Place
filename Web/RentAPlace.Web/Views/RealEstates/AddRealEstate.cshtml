@@ -1,0 +1,56 @@
+﻿@model RentAPlace.Web.ViewModels.RealEstates.CreateRealEstateViewModel;
+@{
+    this.ViewData["Title"] = "Add Real Estate";
+}
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="DistrictName"></label>
+        <input asp-for="DistrictName" class="form-control" />
+        <span asp-validation-for="DistrictName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Size"></label>
+        <input asp-for="Size" class="form-control" />
+        <span asp-validation-for="Size" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Floor"></label>
+        <input asp-for="Floor" class="form-control" />
+        <span asp-validation-for="Floor" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TotalNumberOfFloors"></label>
+        <input asp-for="TotalNumberOfFloors" class="form-control" />
+        <span asp-validation-for="TotalNumberOfFloors" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Year"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Rent"></label>
+        <input asp-for="Rent" class="form-control" />
+        <span asp-validation-for="Rent" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RealEstateTypeName"></label>
+        <input asp-for="RealEstateTypeName" class="form-control" />
+        <span asp-validation-for="RealEstateTypeName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BuildingTypeName"></label>
+        <input asp-for="BuildingTypeName" class="form-control" />
+        <span asp-validation-for="BuildingTypeName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Images"></label>
+        <input asp-for="Images" class="form-control" />
+        <span asp-validation-for="Images" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>

@@ -303,6 +303,33 @@ namespace RentAPlace.Data.Migrations
                     b.ToTable("Districts");
                 });
 
+            modelBuilder.Entity("RentAPlace.Data.Models.Image", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("RealEstateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RemoteImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RealEstateId");
+
+                    b.ToTable("Images");
+                });
+
             modelBuilder.Entity("RentAPlace.Data.Models.RealEstate", b =>
                 {
                     b.Property<int>("Id")
@@ -346,8 +373,8 @@ namespace RentAPlace.Data.Migrations
                     b.Property<int?>("TotalNumberOfFloors")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Year")
-                        .HasColumnType("int");
+                    b.Property<DateTime?>("Year")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -585,6 +612,17 @@ namespace RentAPlace.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("RentAPlace.Data.Models.Image", b =>
+                {
+                    b.HasOne("RentAPlace.Data.Models.RealEstate", "RealEstate")
+                        .WithMany("Images")
+                        .HasForeignKey("RealEstateId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("RealEstate");
+                });
+
             modelBuilder.Entity("RentAPlace.Data.Models.RealEstate", b =>
                 {
                     b.HasOne("RentAPlace.Data.Models.BuildingType", "BuildingType")
@@ -676,6 +714,8 @@ namespace RentAPlace.Data.Migrations
             modelBuilder.Entity("RentAPlace.Data.Models.RealEstate", b =>
                 {
                     b.Navigation("Bookings");
+
+                    b.Navigation("Images");
 
                     b.Navigation("Tags");
                 });

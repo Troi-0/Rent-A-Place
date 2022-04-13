@@ -9,6 +9,6 @@
 
     public interface IRealEstateService
     {
-        Task CreateAsync(CreateRealEstateViewModel input, string userId);
+        Task CreateAsync(CreateRealEstateViewModel input, string userId, string path);
     }
 }

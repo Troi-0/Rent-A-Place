@@ -3,8 +3,19 @@
 @{
     ViewData["Title"] = "All Real Estates, page " + Model.PageNumber;
 }
-@foreach (var realEstate in Model.RealEstates)
-{
-    <h1>@realEstate.RealEstateId</h1>
-}
+<h1>@this.ViewData["Title"]</h1>
+<div class="row">
+    @foreach (var realEstate in Model.RealEstates)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@realEstate.ImageUrl" alt="@realEstate.RealEstateTypeName">
+            <div class="card-body">
+                <h5 class="card-title">Real estate type: @realEstate.RealEstateTypeName</h5>
+                <p class="card-text">District: @realEstate.DistrictName</p>
+                <p class="card-text">Rent: @realEstate.Rent лв</p>
+                <a asp-action="ById" asp-route-id="@realEstate.RealEstateId" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    }
+</div>
 <partial name="_PagingPartial" model="@Model" />

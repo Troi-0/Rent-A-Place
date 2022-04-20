@@ -14,5 +14,7 @@
         IEnumerable<AllRealEstatesViewModel> All(int page, int itemsPerPage);
 
         int GetCount();
+
+        RealEstateByIdViewModel ById(int id);
     }
 }

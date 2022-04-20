@@ -50,10 +50,57 @@
                     RealEstateTypeName = x.RealEstateType.Name,
                     ImageUrl = x.Images.FirstOrDefault().RemoteImageUrl != null
                         ? x.Images.FirstOrDefault().RemoteImageUrl
-                        : "/realEstates" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                        : "/realEstates/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
                 })
                 .ToList();
             return realEstatesViewModel;
+        }
+
+        public RealEstateByIdViewModel ById(int id)
+        {
+            var realEstate = this.realEstateRepository
+                .All()
+                .Where(x => x.Id == id)
+                .Select(x => new RealEstateByIdViewModel
+                {
+                    BuildingTypeName = x.BuildingType.Name,
+                    DistrictName = x.District.Name,
+                    Floor = x.Floor,
+                    RealEstateTypeName = x.RealEstateType.Name,
+                    Rent = x.Rent,
+                    Size = x.Size,
+                    Year = x.Year,
+                    TotalNumberOfFloors = x.TotalNumberOfFloors,
+                })
+                .FirstOrDefault();
+
+            var imagesDbList = this.imageRepository
+                .All()
+                .Where(x => x.RealEstateId == id)
+                .Select(x => new
+                {
+                    x.RemoteImageUrl,
+                    x.Extension,
+                    x.Id,
+                })
+                .ToList();
+
+            var images = new List<string>();
+            foreach (var imageDb in imagesDbList)
+            {
+                if (imageDb.RemoteImageUrl != null)
+                {
+                    images.Add(imageDb.RemoteImageUrl);
+                }
+                else
+                {
+                    images.Add("/realEstates/" + imageDb.Id + "." + imageDb.Extension);
+                }
+            }
+
+            realEstate.ImageUrls = images;
+
+            return realEstate;
         }
 
         public async Task CreateAsync(CreateRealEstateViewModel input, string userId, string path)

@@ -1,0 +1,24 @@
+﻿@model RentAPlace.Web.ViewModels.Users.AllUsersListViewModel;
+@{
+    ViewData["Title"] = "Manage users";
+}
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Change role</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.AllUsers)
+        {
+            <tr>
+                <th scope="row">@user.Id</th>
+                <td>@user.Name</td>
+                <td><button>Promote</button></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<partial name="_PagingPartial" model="@Model" />

@@ -79,5 +79,11 @@ namespace RentAPlace.Web.Controllers
             };
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            var viewModel = this.realEstateService.ById(id);
+            return this.View(viewModel);
+        }
     }
 }

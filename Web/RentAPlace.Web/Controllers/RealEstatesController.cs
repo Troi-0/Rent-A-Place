@@ -61,5 +61,23 @@ namespace RentAPlace.Web.Controllers
 
             return this.Json("ok"); // TODO: Redirect to all real estates
         }
+
+        public IActionResult All(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int itemsPerPage = 12;
+            var viewModel = new AllRealEstatesListViewModel()
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                RealEstatesCount = this.realEstateService.GetCount(),
+                RealEstates = this.realEstateService.All(id, itemsPerPage),
+            };
+            return this.View(viewModel);
+        }
     }
 }

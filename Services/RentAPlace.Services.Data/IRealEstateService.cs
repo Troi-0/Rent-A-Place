@@ -10,5 +10,9 @@
     public interface IRealEstateService
     {
         Task CreateAsync(CreateRealEstateViewModel input, string userId, string path);
+
+        IEnumerable<AllRealEstatesViewModel> All(int page, int itemsPerPage);
+
+        int GetCount();
     }
 }

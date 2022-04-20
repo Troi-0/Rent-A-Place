@@ -1,0 +1,10 @@
+﻿@using RentAPlace.Data.Models
+@model RentAPlace.Web.ViewModels.RealEstates.AllRealEstatesListViewModel;
+@{
+    ViewData["Title"] = "All Real Estates, page " + Model.PageNumber;
+}
+@foreach (var realEstate in Model.RealEstates)
+{
+    <h1>@realEstate.RealEstateId</h1>
+}
+<partial name="_PagingPartial" model="@Model" />

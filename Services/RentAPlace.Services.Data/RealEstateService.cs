@@ -1,9 +1,8 @@
-﻿using System.IO;
-
-namespace RentAPlace.Services.Data
+﻿namespace RentAPlace.Services.Data
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
@@ -33,6 +32,28 @@ namespace RentAPlace.Services.Data
             this.buildingTypeRepository = buildingTypeRepository;
             this.realEstateTypeRepository = realEstateTypeRepository;
             this.imageRepository = imageRepository;
+        }
+
+        public IEnumerable<AllRealEstatesViewModel> All(int page, int itemsPerPage = 12)
+        {
+            var realEstatesViewModel = this.realEstateRepository
+                .AllAsNoTracking()
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new AllRealEstatesViewModel()
+                {
+                    RealEstateId = x.Id,
+                    DistrictName = x.District.Name,
+                    Size = x.Size,
+                    Rent = x.Rent,
+                    RealEstateTypeName = x.RealEstateType.Name,
+                    ImageUrl = x.Images.FirstOrDefault().RemoteImageUrl != null
+                        ? x.Images.FirstOrDefault().RemoteImageUrl
+                        : "/realEstates" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                })
+                .ToList();
+            return realEstatesViewModel;
         }
 
         public async Task CreateAsync(CreateRealEstateViewModel input, string userId, string path)
@@ -111,6 +132,11 @@ namespace RentAPlace.Services.Data
 
             await this.realEstateRepository.AddAsync(realEstate);
             await this.realEstateRepository.SaveChangesAsync();
+        }
+
+        public int GetCount()
+        {
+            return this.realEstateRepository.AllAsNoTracking().Count();
         }
     }
 }

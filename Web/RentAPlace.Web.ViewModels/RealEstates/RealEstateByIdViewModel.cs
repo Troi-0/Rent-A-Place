@@ -12,7 +12,7 @@ namespace RentAPlace.Web.ViewModels.RealEstates
 
         public int? TotalNumberOfFloors { get; set; }
 
-        public DateTime? Year { get; set; }
+        public int Year { get; set; }
 
         public int Rent { get; set; }
 

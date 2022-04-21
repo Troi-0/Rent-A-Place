@@ -37,5 +37,7 @@ namespace RentAPlace.Web.Controllers
             await this.usersService.PromoteUserById(id);
             return this.RedirectToAction(nameof(this.All));
         }
+
+        // TODO: Demote user from role
     }
 }

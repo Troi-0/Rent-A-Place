@@ -59,7 +59,7 @@ namespace RentAPlace.Web.Controllers
                 return this.View(input);
             }
 
-            return this.Json("ok"); // TODO: Redirect to all real estates
+            return this.RedirectToAction(nameof(this.All));
         }
 
         public IActionResult All(int id = 1)

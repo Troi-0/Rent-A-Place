@@ -69,7 +69,7 @@
                     RealEstateTypeName = x.RealEstateType.Name,
                     Rent = x.Rent,
                     Size = x.Size,
-                    Year = x.Year,
+                    Year = x.Year.Value.Year,
                     TotalNumberOfFloors = x.TotalNumberOfFloors,
                 })
                 .FirstOrDefault();

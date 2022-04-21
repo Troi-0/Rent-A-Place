@@ -7,6 +7,7 @@
     <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th>Role</th>
         <th scope="col">Change role</th>
     </tr>
     </thead>
@@ -16,7 +17,10 @@
             <tr>
                 <th scope="row">@user.Id</th>
                 <td>@user.Name</td>
-                <td><button>Promote</button></td>
+                <td>
+                    @String.Join(",", user.RolesNames)
+                </td>
+                <td><a class="btn-light" asp-controller="Users" asp-action="PromoteById" asp-route-id="@user.Id">Promote</a></td>
             </tr>
         }
     </tbody>

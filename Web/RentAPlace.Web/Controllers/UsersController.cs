@@ -1,4 +1,5 @@
-﻿using RentAPlace.Services.Data;
+﻿using System.Threading.Tasks;
+using RentAPlace.Services.Data;
 using RentAPlace.Web.ViewModels.Users;
 
 namespace RentAPlace.Web.Controllers
@@ -17,17 +18,24 @@ namespace RentAPlace.Web.Controllers
         }
 
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult All(int id = 1)
+        public async Task<IActionResult> All(int id = 1)
         {
             const int itemsPerPage = 12;
             var viewModel = new AllUsersListViewModel
             {
-                AllUsers = this.usersService.All(id, itemsPerPage),
+                AllUsers = await this.usersService.All(id, itemsPerPage),
                 RealEstatesCount = this.usersService.Count(),
                 ItemsPerPage = itemsPerPage,
                 PageNumber = id,
             };
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> PromoteById(string id)
+        {
+            // Todo: use AJAX
+            await this.usersService.PromoteUserById(id);
+            return this.RedirectToAction(nameof(this.All));
         }
     }
 }

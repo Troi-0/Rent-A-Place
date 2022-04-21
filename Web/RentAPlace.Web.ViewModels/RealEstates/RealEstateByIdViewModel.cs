@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-
-namespace RentAPlace.Web.ViewModels.RealEstates
+﻿namespace RentAPlace.Web.ViewModels.RealEstates
 {
+    using System.Collections.Generic;
+
     public class RealEstateByIdViewModel
     {
+        public int Id { get; set; }
+
         public int Size { get; set; }
 
         public int? Floor { get; set; }

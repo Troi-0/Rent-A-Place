@@ -85,5 +85,13 @@ namespace RentAPlace.Web.Controllers
             var viewModel = this.realEstateService.ById(id);
             return this.View(viewModel);
         }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await this.realEstateService.DeleteByIdAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
     }
 }

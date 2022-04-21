@@ -16,5 +16,7 @@
         int GetCount();
 
         RealEstateByIdViewModel ById(int id);
+
+        Task DeleteByIdAsync(int id);
     }
 }

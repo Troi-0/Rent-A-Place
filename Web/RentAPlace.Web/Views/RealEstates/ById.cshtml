@@ -1,35 +1,36 @@
-﻿@model RentAPlace.Web.ViewModels.RealEstates.RealEstateByIdViewModel;
+﻿@using RentAPlace.Common
+@model RentAPlace.Web.ViewModels.RealEstates.RealEstateByIdViewModel;
 @{
     ViewData["Title"] = "Real estate details"; //Todo: multiple images
 }
 <div class="w3-content" style="max-width:1100px">
-<div class="w3-row w3-padding-64" id="about">
-    <div class="w3-col m6 w3-padding-large w3-hide-small">
-        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                @foreach (var image in Model.ImageUrls)
-                {
-                    <div class="carousel-item active">
-                        <img src="@image" class="d-block w-100" alt="image">
-                    </div>
-                }
+    <div class="w3-row w3-padding-64" id="about">
+        <div class="w3-col m6 w3-padding-large w3-hide-small">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach (var image in Model.ImageUrls)
+                    {
+                        <div class="carousel-item active">
+                            <img src="@image" class="d-block w-100" alt="image">
+                        </div>
+                    }
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-    </div>
 
-    <div class="w3-col m6 w3-padding-large">
-        <h1 class="w3-center">Real estate type: @Model.RealEstateTypeName</h1><br>
-        <h3>Rent: @Model.Rent euro</h3>
-        <table class="table table-hover">
-            <tbody>
+        <div class="w3-col m6 w3-padding-large">
+            <h1 class="w3-center">Real estate type: @Model.RealEstateTypeName</h1><br>
+            <h3>Rent: @Model.Rent euro</h3>
+            <table class="table table-hover">
+                <tbody>
                 <tr>
                     <th scope="row">District name</th>
                     <td>@Model.DistrictName</td>
@@ -42,16 +43,24 @@
                     <th scope="row">Size</th>
                     <td colspan="2">@Model.Size square meters</td>
                 </tr>
-            <tr>
-                <th scope="row">Building type</th>
-                <td colspan="2">@Model.BuildingTypeName</td>
-            </tr>
-            <tr>
-                <th scope="row">Year of building</th>
-                <td colspan="2">@Model.Year</td>
-            </tr>
-            </tbody>
-        </table>
+                <tr>
+                    <th scope="row">Building type</th>
+                    <td colspan="2">@Model.BuildingTypeName</td>
+                </tr>
+                <tr>
+                    <th scope="row">Year of building</th>
+                    <td colspan="2">@Model.Year</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-</div>
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+{
+    <form method="post">
+        <input type="submit" asp-controller="RealEstates" asp-action="Delete" class="btn btn-danger" value="Delete">
+        <a class="btn btn-warning">Edit</a>
+        <input type="hidden" asp-for="@Model.Id"/>
+    </form>
+}

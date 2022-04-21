@@ -63,6 +63,7 @@
                 .Where(x => x.Id == id)
                 .Select(x => new RealEstateByIdViewModel
                 {
+                    Id = x.Id,
                     BuildingTypeName = x.BuildingType.Name,
                     DistrictName = x.District.Name,
                     Floor = x.Floor,
@@ -178,6 +179,15 @@
             }
 
             await this.realEstateRepository.AddAsync(realEstate);
+            await this.realEstateRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteByIdAsync(int id)
+        {
+            var realEstate = this.realEstateRepository
+                .All()
+                .First(x => x.Id == id);
+            this.realEstateRepository.Delete(realEstate);
             await this.realEstateRepository.SaveChangesAsync();
         }
 

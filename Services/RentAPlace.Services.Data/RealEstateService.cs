@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using RentAPlace.Data.Common.Repositories;
@@ -104,6 +103,27 @@
             return realEstate;
         }
 
+        public EditRealEstateViewModel ByIdEdit(int id)
+        {
+            var realEstate = this.realEstateRepository.All()
+                .Where(x => x.Id == id)
+                .Select(x => new EditRealEstateViewModel
+                {
+                    Id = x.Id,
+                    BuildingType = x.BuildingType.Name,
+                    DistrictName = x.District.Name,
+                    Floor = x.Floor,
+                    TotalNumberOfFloors = x.TotalNumberOfFloors,
+                    Rent = x.Rent,
+                    Year = (DateTime)x.Year,
+                    Type = x.RealEstateType.Name,
+                    Size = x.Size,
+                })
+                .FirstOrDefault();
+
+            return realEstate;
+        }
+
         public async Task CreateAsync(CreateRealEstateViewModel input, string userId, string path)
         {
             var realEstate = new RealEstate
@@ -194,6 +214,62 @@
         public int GetCount()
         {
             return this.realEstateRepository.AllAsNoTracking().Count();
+        }
+
+        public async Task UpdateById(int id, EditRealEstateViewModel input)
+        {
+            var realEstate = this.realEstateRepository.All()
+                .FirstOrDefault(x => x.Id == id);
+
+            realEstate.Floor = input.Floor;
+            realEstate.TotalNumberOfFloors = input.TotalNumberOfFloors;
+            realEstate.Rent = input.Rent;
+            realEstate.Size = input.Size;
+            realEstate.Year = Convert.ToDateTime(input.Year);
+
+            // Building type edit
+
+            var buildingTypeName = input.BuildingType;
+            var buildingType = this.buildingTypeRepository.All().FirstOrDefault(x => x.Name == buildingTypeName);
+            if (buildingType == null)
+            {
+                buildingType = new BuildingType
+                {
+                    Name = buildingTypeName,
+                };
+            }
+
+            realEstate.BuildingType = buildingType;
+
+            // District edit
+            var districtName = input.DistrictName;
+
+            var district = this.districtRepository.All().FirstOrDefault(x => x.Name == districtName);
+            if (district == null)
+            {
+                district = new District
+                {
+                    Name = districtName,
+                };
+            }
+
+            realEstate.District = district;
+
+
+            // Real estate type edit
+            var realEstateTypeName = input.Type;
+            var realEstateType = this.realEstateTypeRepository.All().FirstOrDefault(x => x.Name == realEstateTypeName);
+            if (realEstateType == null)
+            {
+                realEstateType = new RealEstateType
+                {
+                    Name = realEstateTypeName,
+                };
+            }
+
+            realEstate.RealEstateType = realEstateType;
+
+            await this.realEstateRepository.SaveChangesAsync();
         }
     }
 }

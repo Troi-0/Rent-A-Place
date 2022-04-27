@@ -26,7 +26,6 @@ namespace RentAPlace.Web.ViewModels.RealEstates
         public int TotalNumberOfFloors { get; set; }
 
         [Required]
-
         [YearValidation(1800)]
         [DataType(DataType.Date)]
         public DateTime Year { get; set; }

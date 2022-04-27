@@ -58,9 +58,10 @@
 </div>
 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
 {
-    <form method="post">
+    <form method="get">
         <input type="submit" asp-controller="RealEstates" asp-action="Delete" class="btn btn-danger" value="Delete">
-        <a class="btn btn-warning">Edit</a>
+        <input type="submit" asp-controller="RealEstates" asp-action="Edit" class="btn btn-warning" value="Edit">
         <input type="hidden" asp-for="@Model.Id"/>
     </form>
+
 }

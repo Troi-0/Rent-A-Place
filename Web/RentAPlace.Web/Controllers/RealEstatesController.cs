@@ -86,12 +86,30 @@ namespace RentAPlace.Web.Controllers
             return this.View(viewModel);
         }
 
-        [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Delete(int id)
         {
             await this.realEstateService.DeleteByIdAsync(id);
             return this.RedirectToAction(nameof(this.All));
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var model = this.realEstateService.ByIdEdit(id);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditRealEstateViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.realEstateService.UpdateById(input.Id, input);
+            return this.RedirectToAction(nameof(this.ById), new { id = input.Id });
         }
     }
 }

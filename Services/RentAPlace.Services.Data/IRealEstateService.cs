@@ -18,5 +18,9 @@
         RealEstateByIdViewModel ById(int id);
 
         Task DeleteByIdAsync(int id);
+
+        EditRealEstateViewModel ByIdEdit(int id);
+
+        Task UpdateById(int id, EditRealEstateViewModel input);
     }
 }

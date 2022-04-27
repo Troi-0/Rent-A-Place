@@ -16,12 +16,13 @@
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (!(value is int))
-            {
-                return new ValidationResult("Invalid " + validationContext?.DisplayName);
-            }
+            //if (!(value is int))
+            //{
+            //    return new ValidationResult("Invalid " + validationContext?.DisplayName);
+            //}
 
-            var intValue = (int)value;
+            var intValueDateTime = (DateTime)value;
+            var intValue = intValueDateTime.Year;
             if (intValue > DateTime.UtcNow.Year)
             {
                 return new ValidationResult(validationContext?.DisplayName + " is after " + DateTime.UtcNow.Year);

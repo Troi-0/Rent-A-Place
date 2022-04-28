@@ -41,8 +41,7 @@ namespace RentAPlace.Web.Controllers
             var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
             try
             {
-                //TODO: uncoment
-                //await this.bookingService.Book(input.RealEstateId, userId, input);
+                await this.bookingService.Book(input.RealEstateId, userId, input);
             }
             catch (Exception ex)
             {

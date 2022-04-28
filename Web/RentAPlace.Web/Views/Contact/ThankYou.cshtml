@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Thank you for your feedback!";
+}
+
+<div class="jumbotron text-center">
+    <h1 class="display-3">Thank You!</h1>
+    <p class="lead">@ViewData["Title"]</p>
+    <hr>
+    <p>
+        Having trouble? <a asp-controller="Contact" asp-action="ContactUs">Contact us</a>
+    </p>
+    <p class="lead">
+        <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Index" role="button">Continue to homepage</a>
+    </p>
+</div>

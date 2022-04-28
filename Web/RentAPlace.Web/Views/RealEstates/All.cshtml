@@ -2,6 +2,7 @@
 @model RentAPlace.Web.ViewModels.RealEstates.AllRealEstatesListViewModel;
 @{
     ViewData["Title"] = "All Real Estates, page " + Model.PageNumber;
+    Model.ActionName = "All";
 }
 <h1>@this.ViewData["Title"]</h1>
 <div class="row">

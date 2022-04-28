@@ -36,8 +36,13 @@ namespace RentAPlace.Web.Controllers
             // Todo: use AJAX
             await this.usersService.PromoteUserById(id);
             return this.RedirectToAction(nameof(this.All));
+
+            // TODO: Demote user from role
         }
 
-        // TODO: Demote user from role
+        public IActionResult MyReservations()
+        {
+            return this.View();
+        }
     }
 }

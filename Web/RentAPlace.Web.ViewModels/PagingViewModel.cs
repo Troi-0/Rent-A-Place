@@ -19,5 +19,7 @@
         public int RealEstatesCount { get; set; }
 
         public int ItemsPerPage { get; set; }
+
+        public string ActionName { get; set; }
     }
 }

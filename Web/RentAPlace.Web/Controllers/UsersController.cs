@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 using RentAPlace.Services.Data;
 using RentAPlace.Web.ViewModels.Users;
 
@@ -40,9 +41,20 @@ namespace RentAPlace.Web.Controllers
             // TODO: Demote user from role
         }
 
-        public IActionResult MyReservations()
+        public IActionResult MyReservations(int id = 1)
         {
-            return this.View();
+            const int itemsPerPage = 12;
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var viewModel = new ReservationsListViewModel
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                ActionName = nameof(this.MyReservations),
+                Reservations = this.usersService.GetReservations(id, itemsPerPage, userId),
+                RealEstatesCount = this.usersService.ReservationsCount(userId),
+            };
+
+            return this.View(viewModel);
         }
     }
 }

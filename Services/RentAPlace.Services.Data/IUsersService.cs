@@ -12,5 +12,9 @@
         int Count();
 
         Task PromoteUserById(string id);
+
+        IEnumerable<ReservationViewModel> GetReservations(int page, int itemsPerPage, string userId);
+
+        int ReservationsCount(string userId);
     }
 }

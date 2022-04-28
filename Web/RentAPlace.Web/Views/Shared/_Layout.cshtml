@@ -36,6 +36,12 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="All">Manage users</a>
                             </li>
                         }
+                        @if (this.User.Identity!.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="MyReservations">My Reservations</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

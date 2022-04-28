@@ -1,0 +1,22 @@
+﻿@model RentAPlace.Web.ViewModels.Reservation.ReserveViewModel;
+@{
+    ViewData["Title"] = "Reserving...";
+}
+<form method="post" class="col-md-6 offset-md-3">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="ReserveFrom"></label>
+        <input asp-for="ReserveFrom" class="form-control" />
+        <span asp-validation-for="ReserveFrom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ReserveTo"></label>
+        <input asp-for="ReserveTo" class="form-control" />
+        <span asp-validation-for="ReserveTo" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="RealEstateId" />
+    <div class="form-group w3-padding-16">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+</form>

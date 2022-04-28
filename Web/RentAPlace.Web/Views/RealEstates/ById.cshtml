@@ -29,28 +29,35 @@
         <div class="w3-col m6 w3-padding-large">
             <h1 class="w3-center">Real estate type: @Model.RealEstateTypeName</h1><br>
             <h3>Rent: @Model.Rent euro</h3>
+            @if (this.User.Identity!.IsAuthenticated)
+            {
+                <form method="get">
+                    <input type="submit" asp-controller="Reservation" asp-action="Reserve" class="btn btn-info" value="Reserve">
+                    <input type="hidden" asp-for="@Model.Id" />
+                </form>
+            }
             <table class="table table-hover">
                 <tbody>
-                <tr>
-                    <th scope="row">District name</th>
-                    <td>@Model.DistrictName</td>
-                </tr>
-                <tr>
-                    <th scope="row">Floor</th>
-                    <td>@Model.Floor / @Model.TotalNumberOfFloors</td>
-                </tr>
-                <tr>
-                    <th scope="row">Size</th>
-                    <td colspan="2">@Model.Size square meters</td>
-                </tr>
-                <tr>
-                    <th scope="row">Building type</th>
-                    <td colspan="2">@Model.BuildingTypeName</td>
-                </tr>
-                <tr>
-                    <th scope="row">Year of building</th>
-                    <td colspan="2">@Model.Year</td>
-                </tr>
+                    <tr>
+                        <th scope="row">District name</th>
+                        <td>@Model.DistrictName</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Floor</th>
+                        <td>@Model.Floor / @Model.TotalNumberOfFloors</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Size</th>
+                        <td colspan="2">@Model.Size square meters</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Building type</th>
+                        <td colspan="2">@Model.BuildingTypeName</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Year of building</th>
+                        <td colspan="2">@Model.Year</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -61,7 +68,7 @@
     <form method="get">
         <input type="submit" asp-controller="RealEstates" asp-action="Delete" class="btn btn-danger" value="Delete">
         <input type="submit" asp-controller="RealEstates" asp-action="Edit" class="btn btn-warning" value="Edit">
-        <input type="hidden" asp-for="@Model.Id"/>
+        <input type="hidden" asp-for="@Model.Id" />
     </form>
-
+    <div class="w3-padding-64"></div>
 }

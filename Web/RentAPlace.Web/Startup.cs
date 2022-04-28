@@ -61,11 +61,17 @@
             services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
+            var configurationBuilder = new ConfigurationBuilder();
+            configurationBuilder
+                .AddJsonFile("appsettings.Production.json");
+            var myconfiguration = configurationBuilder.Build();
+
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(myconfiguration["SendGridApiKey:Key"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IRealEstateService, RealEstateService>();
             services.AddTransient<IUsersService, UsersService>();
+            services.AddTransient<IBookingService, BookingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,23 @@
+﻿@model RentAPlace.Web.ViewModels.ContactUs.ContactUsViewModel;
+@{
+    ViewData["Title"] = "Contact Us";
+}
+<form method="post" class="col-md-6 offset-md-3">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FromEmail"></label>
+        <input asp-for="FromEmail" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Title"></label>
+        <input asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+    </div>
+    <div class="form-group w3-padding-16">
+        <input type="submit" class="btn btn-primary" />
+    </div>
+</form>

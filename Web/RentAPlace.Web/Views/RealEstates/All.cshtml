@@ -5,6 +5,43 @@
     Model.ActionName = "All";
 }
 <h1>@this.ViewData["Title"]</h1>
+<div class="col-md-6 offset-md-3  justify-content-center">
+    <h3 class="row">Search:</h3>
+    <form method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="SearchViewModel.District"></label>
+            <input asp-for="SearchViewModel.District" class="form-control" />
+            <span asp-validation-for="SearchViewModel.District" class="text-danger"></span>
+        </div>
+        <div class="row justify-content-center">
+            <div class="form-group col-md-6">
+                <label asp-for="SearchViewModel.MinPrice"></label>
+                <input asp-for="SearchViewModel.MinPrice" class="form-control" />
+                <span asp-validation-for="SearchViewModel.MinPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="SearchViewModel.MaxPrice"></label>
+                <input asp-for="SearchViewModel.MaxPrice" class="form-control" />
+                <span asp-validation-for="SearchViewModel.MaxPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="SearchViewModel.MinSize"></label>
+                <input asp-for="SearchViewModel.MinSize" class="form-control" />
+                <span asp-validation-for="SearchViewModel.MinSize" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="SearchViewModel.MaxSize"></label>
+                <input asp-for="SearchViewModel.MaxSize" class="form-control" />
+                <span asp-validation-for="SearchViewModel.MaxSize" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group w3-padding-16">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+        <hr />
+    </form>
+</div>
 <div class="row">
     @foreach (var realEstate in Model.RealEstates)
     {
@@ -13,10 +50,15 @@
             <div class="card-body">
                 <h5 class="card-title">Real estate type: @realEstate.RealEstateTypeName</h5>
                 <p class="card-text">District: @realEstate.DistrictName</p>
-                <p class="card-text">Rent: @realEstate.Rent лв</p>
+                <p class="card-text">Rent: @realEstate.Rent euro</p>
                 <a asp-action="ById" asp-route-id="@realEstate.RealEstateId" class="btn btn-primary">Details</a>
             </div>
         </div>
     }
 </div>
+
 <partial name="_PagingPartial" model="@Model" />
+
+<div class="w3-padding-64">
+
+</div>

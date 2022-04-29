@@ -52,7 +52,61 @@
                         : "/realEstates/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
                 })
                 .ToList();
+
             return realEstatesViewModel;
+        }
+
+        public IEnumerable<AllRealEstatesViewModel> AllWithSearch(int page, int itemsPerPage, SearchViewModel input)
+        {
+            var realEstatesViewModel = this.realEstateRepository
+                .AllAsNoTracking();
+
+            if (input.District != null)
+            {
+                realEstatesViewModel = realEstatesViewModel
+                    .Where(x => x.District.Name == input.District);
+            }
+
+            if (input.MinSize != null)
+            {
+                realEstatesViewModel = realEstatesViewModel
+                    .Where(x => x.Size >= input.MinSize);
+            }
+
+            if (input.MaxSize != null)
+            {
+                realEstatesViewModel = realEstatesViewModel
+                    .Where(x => x.Size <= input.MaxSize);
+            }
+
+            if (input.MinPrice != null)
+            {
+                realEstatesViewModel = realEstatesViewModel
+                    .Where(x => x.Rent >= input.MinPrice);
+            }
+
+            if (input.MaxPrice != null)
+            {
+                realEstatesViewModel = realEstatesViewModel
+                    .Where(x => x.Rent <= input.MaxPrice);
+            }
+
+            var allRealEstatesViewModels = realEstatesViewModel.OrderByDescending(x => x.CreatedOn)
+                .Skip((page - 1) * itemsPerPage)
+                .Take(itemsPerPage)
+                .Select(x => new AllRealEstatesViewModel()
+                {
+                    RealEstateId = x.Id,
+                    DistrictName = x.District.Name,
+                    Size = x.Size,
+                    Rent = x.Rent,
+                    RealEstateTypeName = x.RealEstateType.Name,
+                    ImageUrl = x.Images.FirstOrDefault().RemoteImageUrl != null
+                        ? x.Images.FirstOrDefault().RemoteImageUrl
+                        : "/realEstates/" + x.Images.FirstOrDefault().Id + "." + x.Images.FirstOrDefault().Extension,
+                });
+
+            return allRealEstatesViewModels.ToList();
         }
 
         public RealEstateByIdViewModel ById(int id)
@@ -214,6 +268,44 @@
         public int GetCount()
         {
             return this.realEstateRepository.AllAsNoTracking().Count();
+        }
+
+        public int GetCountWithSearch(SearchViewModel input)
+        {
+            var realEstates = this.realEstateRepository
+                .AllAsNoTracking();
+
+            if (input.District != null)
+            {
+                realEstates = realEstates
+                    .Where(x => x.District.Name == input.District);
+            }
+
+            if (input.MinSize != null)
+            {
+                realEstates = realEstates
+                    .Where(x => x.Size >= input.MinSize);
+            }
+
+            if (input.MaxSize != null)
+            {
+                realEstates = realEstates
+                    .Where(x => x.Size <= input.MaxSize);
+            }
+
+            if (input.MinPrice != null)
+            {
+                realEstates = realEstates
+                    .Where(x => x.Rent >= input.MinPrice);
+            }
+
+            if (input.MaxPrice != null)
+            {
+                realEstates = realEstates
+                    .Where(x => x.Rent <= input.MaxPrice);
+            }
+
+            return realEstates.Count();
         }
 
         public async Task UpdateById(int id, EditRealEstateViewModel input)

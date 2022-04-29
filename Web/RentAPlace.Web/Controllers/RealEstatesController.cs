@@ -1,19 +1,18 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using RentAPlace.Common;
-using RentAPlace.Data.Models;
-using RentAPlace.Services.Data;
-
-namespace RentAPlace.Web.Controllers
+﻿namespace RentAPlace.Web.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using RentAPlace.Common;
+    using RentAPlace.Data.Models;
+    using RentAPlace.Services.Data;
     using RentAPlace.Web.ViewModels.RealEstates;
 
     public class RealEstatesController : BaseController
@@ -76,6 +75,25 @@ namespace RentAPlace.Web.Controllers
                 PageNumber = id,
                 RealEstatesCount = this.realEstateService.GetCount(),
                 RealEstates = this.realEstateService.All(id, itemsPerPage),
+            };
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult All(AllRealEstatesListViewModel input, int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int itemsPerPage = 12;
+            var viewModel = new AllRealEstatesListViewModel()
+            {
+                ItemsPerPage = itemsPerPage,
+                PageNumber = id,
+                RealEstatesCount = this.realEstateService.GetCountWithSearch(input.SearchViewModel),
+                RealEstates = this.realEstateService.AllWithSearch(id, itemsPerPage, input.SearchViewModel),
             };
             return this.View(viewModel);
         }

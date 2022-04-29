@@ -13,7 +13,11 @@
 
         IEnumerable<AllRealEstatesViewModel> All(int page, int itemsPerPage);
 
+        IEnumerable<AllRealEstatesViewModel> AllWithSearch(int page, int itemsPerPage, SearchViewModel input);
+
         int GetCount();
+
+        int GetCountWithSearch(SearchViewModel input);
 
         RealEstateByIdViewModel ById(int id);
 

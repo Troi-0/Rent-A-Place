@@ -5,5 +5,7 @@
     public class AllRealEstatesListViewModel : PagingViewModel
     {
         public IEnumerable<AllRealEstatesViewModel> RealEstates { get; set; }
+
+        public SearchViewModel SearchViewModel { get; set; }
     }
 }
